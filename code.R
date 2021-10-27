@@ -18,11 +18,7 @@ require(viridis)
 require(gtools)
 require(ggplot2)
 
-#setwd("C:/Users/JonathanOng/Downloads")
-#setwd("C:/Users/yzong/Downloads")
-#setwd("C:/Users/pmanikowski/Downloads")
-setwd("/Users/romanelgff/Documents/Fac/L3 MIASHS - Erasmus/S2/Optim, networks & graphs/CW2")
-#setwd("C:/Users/")
+# setwd("...")
 
 # Loading data
 data <- read.csv("Coronary_artery_disease_data_full_names.csv")
