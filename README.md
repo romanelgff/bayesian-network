@@ -35,3 +35,36 @@ Different colours of the vertices indicate their respective block groups. Colour
 
 ### Introduction of lists of edges that should be included and should not be included.
 
+Fig 3. The optimised network with additioInal blacklist and whitelist entries as specified. The new network score given the block ordering and newly imposed whitelist and blacklists:
+
+The network with the new constraints has one fewer arc compared to the previous two networks (18 arcs against 19) given the additional constraints. Hence, the score decreases from -1797.70 to -...
+
+### Fit the optimized network to the data using the maximum likelihood method.
+
+We aimed to check if the value we obtained from the fitted Bayesian network is expected, we calculate the conditional probabilities by hand and conclude that the conditional probabilities calculated by hand agree with the conditional probabilities obtained from the bn.fit() command.
+
+### Conditional probabilities for nodes Q_wave and Coronary_artery_disease.
+
+Individuals who do not suffer from hypercholesterolaemia and are not exposed to any hereditary predispositions have a relatively low risk (3.14 times lower) of having coronary artery disease compared to those who suffer from hypercholesterolaemia and are exposed to hereditary predispositions, as shown in Fig. 5.1. However, in 50% of individuals with hereditary predispositions who do not suffer from hypercholesterolaemia, the disease is prevalent. Conversely, individuals who do not have hereditary predispositions and suffer from hypercholesterolaemia show a 5 percent-point higher risk of coronary artery disease. Besides, individuals who do not suffer from hypercholesterolaemia with hereditary predispositions are 2.80 times as likely to d:evelop the disease than those without any predisposition.
+
+Therefore, we can hypothesis that having hypercholesterolaemia and hereditary predispositions does significantly increase the risk of coronary artery disease, with hypercholesterolaemia taking precedence in importance, while hereditary predisposition may be seen as an intermediary factor.
+
+Given in the first panel of Fig. 5.2, no instance of coronary artery disease and non-usable Q-confidence is shown, and there is 100% certainty that there is no Q-wave. Hence, there is a direct effect on Q- wave by the factors Q-confidence and coronary artery disease and this is also shown in the network in Fig. 3.
+We hypothesise that Q-confidence may be a measure of our certainty of the result of Q-wave given a particular result of having coronary artery disease✓or not. As there is no usable confidence and no coronary artery disease present in the first panel of Fig. 5.2, we can be certain that there is no Q-wave. However, given an instance of coronary artery disease and no usable Q-confidence, there is a probability of having Q-wave, though still in favour of not.
+Regarding coronary artery disease, we hypothesise that it is neither affected by Q-confidence nor Q- wave. This is further evidenced by the network in Fig. 3 and the initial block orderings given.
+
+### Statistical tests to check the edges.
+
+The above code provides the respective confidence intervals for the dependencies of the respective **ci.test()** arguments. Testing if the arcs between vertices Smoker and Hypercholesterolaemia;Q_confidence and Q_wave; and Coronary_artery_disease and T_confidence should be included in the network, the p-values for all three tests are less than 0.05 (supposing we are testing at 95% confidence), suggesting that they all should be included in the graph. Given the latest iteration of the network in Fig.#3, we suggest adding the arc between Coronary_artery_disease and T_confidence to the whitelist as of the three tests, this is the only one not included in the whitelist for Task 3.
+
+### Approximate the probability p that a person has coronary artery disease given that the person is female, a non-smoker, has a high heart rate or age, has atypical angina pectoria, has a T-wave, but no Q-wave.
+
+Logic sampling randomly chooses a state for each condition inputted in the function. Every condition (or node in the network) has two states (‘yes’ or ‘no’, for example), which gives us a total of 2*7=14 states. Every state is equally likely to occur. In contrast, the likelihood weighing method uses more information by weighing the states using their prior probabilities. It is hence a more complex algorithm giving less fluctuated results. Thus, the likelihood weighing method is preferred to logic sampling. A million iterations are a good choice when applying this algorithm and gives more accurate results.
+
+### Assuming that no ECG information is available, finding a new optimal Bayesian Network in the absence of the associated variables.
+
+Assuming now that we have no ECG information provided to us in the original data, the actions in Task 1 to Task 3 are executed with the new data. The R code is shown below, and the new optimal Bayesian network is shown in Fig. 8. Constraints such as the block order (represented visually with the vertex colours in Fig. 8); the given whitelist; and the given blacklist excluding any factors from the ECG block; are included in the network.
+
+Simulations using the likelihood weighting method are used to estimate the conditional probability that a female non-smoker with definite myocardial infarction and atypical angina pectoria has coronary artery disease from the latest iteration of the Bayesian network. The result of approximately 0.170 (17%) is shown above. 
+
+However, when ECG information is included, the probabilities given by cpquery are much higher than without its inclusion. Indeed, the probability increase from approximately 0.248 (24.8%) when both Q-wave and T-wave are negative, up to 0.872 (87.2%) when the results of both Q-wave and T-wave are positive. Therefore, we can hypothesise that these additional factors are crucial in the disease’s determination and should not be discarded from our model.
