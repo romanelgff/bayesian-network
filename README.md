@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This group academics project was made in the frame of the Graph theory and Optimisation course at Plymouth University (2020). The data used in this coursework are discussed in detail in Højsgaard and Thiesson (1995) and are relevant to coronary artery disease. The following variables are available in the file **Coronary_artery_disease_data_full_names.csv**, with the order being taken from the file. The clinical diagnosis in Coronary_artery_disease on the state of the disease is made on the basis of coronary arteriography. We want to understand the diagnoses in this variable better.
+This group academics project was made in the frame of the Graph theory and Optimisation course at Plymouth University (2020, Professor: Julian Stander). The data used in this coursework are discussed in detail in Højsgaard and Thiesson (1995) and are relevant to coronary artery disease. The following variables are available in the file **Coronary_artery_disease_data_full_names.csv**, with the order being taken from the file. The clinical diagnosis in Coronary_artery_disease on the state of the disease is made on the basis of coronary arteriography. We want to understand the diagnoses in this variable better.
 
 ## Variables
 
