@@ -24,6 +24,8 @@ require(ggplot2)
 data <- read.csv("Coronary_artery_disease_data_full_names.csv")
 
 CAD_data <- as.data.frame(data)
+CAD_data[sapply(CAD_data, is.character)] <- lapply(CAD_data[sapply(CAD_data, is.character)],
+                                                   as.factor)
 str(CAD_data)
 head(CAD_data)
 names(CAD_data)
@@ -322,7 +324,3 @@ cpquery(bn.fit(CAD_3, CAD_data, method = "mle"), (Coronary_artery_disease == "Ye
              Angina_pectoria = "Atypical",             
              T_wave = "No",
              Q_wave = "No"), n = 1000000, method = "lw")
-
-
-
-
