@@ -53,14 +53,12 @@ The network with the new constraints has one fewer arc compared to the previous 
 
 ### Fitting the optimized network to the data using the maximum likelihood method.
 
-We aimed to check if the value we obtained from the fitted Bayesian network is expected, we calculate the conditional probabilities by hand and conclude that the conditional probabilities calculated by hand agree with the conditional probabilities obtained from the bn.fit() command.
+We aimed to check if the value we obtained from the fitted Bayesian network is expected, we calculate the conditional probabilities by hand and conclude that the conditional probabilities calculated by hand agree with the conditional probabilities obtained from the bn.fit() command. The code used in showed below.
 
 ```{r}
-m <- nb.fit(CAD_3, CAD_data, method = "mle")
+m <- bn.fit(CAD_3, CAD_data, method = "mle")
 m$Coronary_artery_disease
-```
 
-```{r}
 t <- table(CAD_data[, c(14,10,12)])
 prop.table(t, c(3,2))
 ```
@@ -83,7 +81,7 @@ Regarding coronary artery disease, we hypothesise that it is neither affected by
 
 ### Statistical tests to check the edges.
 
-We tested if the arcs between vertices Smoker and Hypercholesterolaemia;Q_confidence and Q_wave; and Coronary_artery_disease and T_confidence should be included in the network. The p-values for all three tests are less than 0.05 (supposing we are testing at 95% confidence), suggesting that they all should be included in the graph. 
+We tested if the arcs between vertices Smoker and Hypercholesterolaemia ; Q_confidence and Q_wave ; and Coronary_artery_disease and T_confidence should be included in the network. To do so, we used the command **ci.test()**. The p-values for all three tests are less than 0.05 (supposing we are testing at 95% confidence), suggesting that they all should be included in the graph. 
 
 ### Approximate the probability p that a person has coronary artery disease given that the person is female, a non-smoker, has a high heart rate or age, has atypical angina pectoria, has a T-wave, but no Q-wave.
 
@@ -99,10 +97,12 @@ Assuming now that we have no ECG information provided to us in the original data
 *Fig. 8: The new optimised Bayesian network with the same constraints from the three first steps, except now without ECG information.*
 
 ```{r}
-cpquery(bn.fit(CAD_8, CAD8, method = "mle"), (Coronary_artery_disease == "Yes"),
+cpquery(bn.fit(CAD_8, CAD8, method = "mle"), 
+        (Coronary_artery_disease == "Yes"),
         list(Sex = "Female", Smoker = "No",
              Previous_myocardial_infarction = "Definite",
-             Angina_pectoria = "Atypical"), n = 1000000, method = "lw")
+             Angina_pectoria = "Atypical"), 
+        n = 1000000, method = "lw")
 ```
 
 Simulations using the likelihood weighting method are used to estimate the conditional probability that a female non-smoker with definite myocardial infarction and atypical angina pectoria has coronary artery disease from the latest iteration of the Bayesian network. The result of approximately 0.170 (17%) is found thanks to the code above. *(The remaining of the probabilities calculated using **cpquery()** function are visible in the source code.R.)*
